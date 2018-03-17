@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="ISO-8859-1"?>
-<Favorite_books>
+<favorite_books>
  <book id="1">
   <title>Machine Learning Yearning</title>
   <author>Andrew NG</author>
@@ -32,5 +32,4 @@
   <price>$160.00</price>
   <year>2018</year>
  </book> 
- 
 </favorite_books>
