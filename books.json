@@ -1,0 +1,34 @@
+﻿{"favorite books" :[
+	{
+	"title" : "Machine Learning Yearning",
+	"author" : ["Andrew NG"],
+	"subject" : ["Deep Learning"],
+	"edition" : "3.0",
+	"price" : "$260.00",
+	"year" : "2017"
+	},
+        {
+	"title" : "Predictive Analytics",
+	"author" : ["Eric Siegel"],
+	"subject" : ["Statistics"],
+	"edition" : "6.0",
+	"price" : "$100.00",
+	"year" : "2016"
+	},
+        {
+	"title" : "Storytelling With Data",
+	"author" : ["Kole Nussbaumer Knaflic"],
+	"subject" : ["Data Transformation"],
+	"edition" : "5.0",
+	"price" : "$70.00",
+	"year" : "2015"
+	},
+        {
+	"title" : "Introduction to Machine Learning with Python",
+	"author" : ["Andreas C Muller", "Sarah Guido"],
+	"subject" : ["Machine Learning"],
+	"edition" : "8.0",
+	"price" : "$160.00",
+	"year" : "2018"
+	}]
+}
