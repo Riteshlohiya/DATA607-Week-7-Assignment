@@ -1,0 +1,135 @@
+---
+title: "DATA607 Week 7 Assignment"
+author: "Ritesh Lohiya"
+date: "March 17, 2018"
+output: html_document
+---
+
+Assignment - Working with XML and JSON in R:
+
+Pick three of your favorite books on one of your favorite subjects. At least one of the books should have more than one author. For each book, include the title, authors, and two or three other attributes that you find interesting.
+Take the information that you've selected about these three books, and separately create three files which store the book's information in HTML (using an html table), XML, and JSON formats (e.g. "books.html", "books.xml", and "books.json"). To help you better understand the different file structures, I'd prefer that you create each of these files "by hand" unless you're already very comfortable with the file formats.
+Write R code, using your packages of choice, to load the information from each of the three sources into separate R data frames. Are the three data frames identical?
+Your deliverable is the three source files and the R code. If you can, package your assignment solution up into an .Rmd file and publish to rpubs.com. [This will also require finding a way to make your three text files accessible from the web].
+ 
+#install.packages("XML")
+```{r}
+library(RCurl)
+library(XML)
+library(RJSONIO)
+library(stringr)
+library(plyr)
+library(dplyr)
+```
+
+Below are the three files:
+
+HTML: https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.html
+XML: https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.xml
+JSON: https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.json
+
+Loading HTML file:
+
+```{r}
+books.html <- htmlParse(getURL("https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.html"))
+books.html
+```
+
+The column names are in <th>, using xpathSApply we can get the column names:
+
+```{r}
+column <- xpathSApply(doc = books.html, path = "//th", fun = xmlValue)
+column
+```
+
+The values are in <td>, using xpathSApply we can get the values:
+
+To get the tittle:
+
+```{r}
+Title <- xpathSApply(doc = books.html, path = "//td[position()=1]", fun = xmlValue)
+Title
+```
+
+Like wise using the loop create the final output data:
+
+```{r}
+books_html_out <- data.frame(c(1:4))
+for (i in 1:length(column)){
+  path_string <- paste("//td[position()=", i, "]", sep = "")
+  books_html_out[,i] <- xpathSApply(doc = books.html, path = path_string, fun = xmlValue)
+}
+names(books_html_out) <- column
+books_html_out
+```
+
+Loading HTML file:
+
+```{r}
+books.xml <- xmlParse(getURL("https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.xml"))
+books.xml
+```
+
+Using xmlName look at the child nodes under the <book id="1">:
+
+```{r}
+column <- xpathSApply(doc = books.xml, path = "//book[@id='1']/child::*", fun = xmlName)
+column
+```
+
+Like wise using the loop create the final output data:
+
+```{r}
+books_xml_out <- data.frame(c(1:4))
+for (i in column){
+  path_string <- paste("//", i, sep = "")
+  books_xml_out[, i] <- xpathSApply(doc = books.xml, path = path_string, fun = xmlValue)
+}
+books_xml_out
+```
+
+Loading JSON file after checking if its valid JSON file:
+
+```{r}
+url_json <- "https://raw.githubusercontent.com/Riteshlohiya/DATA607-Week-7-Assignment/master/books.json"
+isValidJSON(url_json)
+htmlParse(getURL(url_json))
+```
+
+```{r}
+books_json <- fromJSON(url_json)
+books_json
+```
+
+Use sapply to unlist:
+
+```{r}
+books_json <- sapply(books_json[[1]], unlist)
+books_json
+```
+
+Now to transpose use lapply:
+
+```{r}
+books_json <- lapply(books_json, t)
+books_json
+```
+
+Create seperate dataframes for all the distinct books:
+
+```{r}
+books_json <- lapply(books_json, data.frame, stringsAsFactors = F)
+books_json
+```
+
+Use Rbind.fill to merge all the dataframes into one final dataframe:
+
+```{r}
+books_json_out <- do.call("rbind.fill", books_json)
+books_json_out
+```
+
+Comparison:
+
+The output for HTML amd XML looks similar. In HTML and XML the the authors are treated as one string and loaded into one attribute "author".But in JSON file when there are more than 1 author it stores the different authors in different attributes like "author1"" and "author2". So we can see that the data is in wide format in JSON format.
+
