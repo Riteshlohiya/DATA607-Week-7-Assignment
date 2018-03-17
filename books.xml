@@ -26,7 +26,7 @@
  </book> 
  <book id="4">
   <title>Introduction to Machine Learning with Python</title>
-  <author>Andreas C Muller & Sarah Guido</author>
+  <author>Andreas C Muller and Sarah Guido</author>
   <subject>Machine Learning</subject>
   <edition>8.0</edition>
   <price>$160.00</price>
