@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="ISO-8859-1"?>
+<Favorite_books>
+ <book id="1">
+  <title>Machine Learning Yearning</title>
+  <author>Andrew NG</author>
+  <Subject>Deep Learning</Subject>
+  <edition>3.0</edition>
+  <price>$260.00</price>
+  <year>2017</year>
+ </book>
+ <book id="2">
+  <title>Predictive Analytics</title>
+  <author>Eric Siegel</author>
+  <Subject>Statistics</Subject>
+  <edition>6.0</edition>
+  <price>$100.00</price>
+  <year>2016</year>
+ </book>
+ <book id="3">
+  <title>Storytelling With Data</title>
+  <author>Kole Nussbaumer Knaflic</author>
+  <Subject>Data Transformation</Subject>
+  <edition>5.0</edition>
+  <price>$70.00</price>
+  <year>2015</year>
+ </book> 
+ <book id="4">
+  <title>Introduction to Machine Learning with Python</title>
+  <author>Andreas C Muller & Sarah Guido</author>
+  <Subject>Machine Learning</Subject>
+  <edition>8.0</edition>
+  <price>$160.00</price>
+  <year>2018</year>
+ </book> 
+ 
+</favorite_books>
